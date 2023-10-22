@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+.video-cell{
+  width: 50%;
+
+}
+.video-grid{
+  display: flex;
+  flex-wrap: wrap;
+}
+.video-js{
+  width: 100%;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
