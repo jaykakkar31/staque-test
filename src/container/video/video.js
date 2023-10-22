@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import * as Styled from "./video.styled";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
+
 const Video = () => {
     const [gridSize, setGridSize] = useState({ rows: 2, columns: 2 });
     const [videos, setVideos] = useState([]); // An array to store video instances
@@ -38,8 +39,7 @@ const Video = () => {
         const { rows, columns } = gridSize;
         const totalVideos = rows * columns;
         // Create video sources for HLS streams (update with your actual stream URLs)
-        let val =
-            "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8";
+        let val =process.env.REACT_APP_VIDEO_URL
         if (videoSources.length < rows * columns) {
             for (let i = 1; i <= rows * columns; i++) {
                 videoSources.push(val);
