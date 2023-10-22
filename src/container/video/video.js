@@ -1,17 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import * as Styled from "./video.styled";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
 const Video = () => {
-    const [gridSize, setGridSize] = useState({ rows: 2, columns: 2 });
-    const [videos, setVideos] = useState([]); // An array to store video instances
-    const [inactiveTimer, setInactiveTimer] = useState(60000);
-    const [isTabActive, setIsTabActive] = useState(true);
-    const [isBuffering, setIsBuffering] = useState(false);
+    const [gridSize, setGridSize] = React.useState({ rows: 2, columns: 2 });
+    const [videos, setVideos] = React.useState([]); // An array to store video instances
+    const [inactiveTimer, setInactiveTimer] = React.useState(60000);
+    const [isTabActive, setIsTabActive] = React.useState(true);
+    const [isBuffering, setIsBuffering] = React.useState(false);
     let videoSources = [];
 
-    useEffect(() => {
+    React.useEffect(() => {
         initializeVideoPlayers();
         const handleChangeVisibility = () => {
             if (document.hidden) {
