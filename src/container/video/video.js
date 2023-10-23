@@ -4,7 +4,7 @@ import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
 const Video = () => {
-    const [gridSize, setGridSize] = React.useState({ rows: 2, columns: 2 });
+    const [gridSize, setGridSize] = React.useState({ rows: null, columns: null });
     const [videos, setVideos] = React.useState([]); // An array to store video instances
     const [inactiveTimer, setInactiveTimer] = React.useState(60000);
     const [isTabActive, setIsTabActive] = React.useState(true);
@@ -32,7 +32,7 @@ const Video = () => {
         };
 
         document.addEventListener("visibilitychange", handleChangeVisibility);
-    }, [document]);
+    }, [document,gridSize]);
 
     // Function to initialize Video.js players in the grid
     const initializeVideoPlayers = () => {
@@ -40,7 +40,6 @@ const Video = () => {
         const totalVideos = rows * columns;
         // Create video sources for HLS streams (update with your actual stream URLs)
         let val =process.env.REACT_APP_VIDEO_URL
-        console.log("-----------------",val);
         if (videoSources.length < rows * columns) {
             for (let i = 1; i <= rows * columns; i++) {
                 videoSources.push(val);
@@ -124,7 +123,7 @@ const Video = () => {
     };
 
     const handleGridSizeChange = (event, name) => {
-        let num = event.target.value === "" ? null : event.target.value;
+        let num = event.target.value === "" ? 0 : parseInt(event.target.value);
         if (name === "row") {
             setGridSize((prev) => {
                 return { ...prev, rows: num };
@@ -155,11 +154,13 @@ const Video = () => {
                         placeholder="Enter no of rows"
                         type="number"
                         value={gridSize.rows}
+                        min={1}
                         onChange={(e) => handleGridSizeChange(e, "row")}
                     />
                     <input
                         placeholder="Enter no of columns"
                         type="number"
+                        min={1}
                         value={gridSize.columns}
                         onChange={(e) => handleGridSizeChange(e, "column")}
                     />
